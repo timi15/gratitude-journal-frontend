@@ -1,0 +1,16 @@
+.MuiInputBase-root.Mui-disabled .MuiInputBase-input {
+    -webkit-text-fill-color: #E2DBD0 !important;
+    opacity: 60% !important;
+}
+
+.MuiTypography-h4{
+    color: whitesmoke !important;
+    text-align: center;
+    margin-bottom: 2rem !important;
+    font-weight: bold !important;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: brightness(0) invert(1);
+    opacity: 1;
+}
