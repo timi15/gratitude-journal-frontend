@@ -21,7 +21,9 @@ export const LogIn = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post(
+
+        axios
+            .post(
             "http://localhost:8080/v1/gratitude-journal/auth/login",
             formData,
             {
@@ -45,6 +47,7 @@ export const LogIn = () => {
                         const errors = err.response.data.errors;
                         const firstError = Object.values(errors)[0][0];
                         showSnackbar(firstError, "error");
+
                     } else if(err.response.status === 500) {
                         showSnackbar(err.response.data.message, "error");
                     }

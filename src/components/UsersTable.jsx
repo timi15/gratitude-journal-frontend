@@ -12,8 +12,8 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {UserContext} from "../context/user/User";
-import {EditUserModal} from "./EditUserModal";
 import {AuthContext} from "../context/auth/Auth";
+import {EditUserModal} from "./EditUserModal";
 import "../asserts/css/table.css"
 
 export const UsersTable = () => {
@@ -66,9 +66,13 @@ export const UsersTable = () => {
                         {users
                             .map((user, index) => (
                                 <TableRow hover key={user.id}>
+
                                     <TableCell>{user.name}</TableCell>
+
                                     <TableCell>{user.username}</TableCell>
+
                                     <TableCell>{user.email}</TableCell>
+
                                     <TableCell>{user.role}</TableCell>
 
                                     <TableCell align="center">

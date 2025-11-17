@@ -33,14 +33,19 @@ export const Home = () => {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
-        }).then(res => {
-            handleSetPosts(res.data);
         })
+            .then(res => {
+                handleSetPosts(res.data);
+
+            })
             .catch((err) => {
                 if (err.response && err.response.status === 401) {
                     showSnackbar("Your session has expired. Please log in again.", "warning");
                     logout();
                 }
+
+                showSnackbar("Unexpected error occurred.", "error");
+
             });
 
     }, []);

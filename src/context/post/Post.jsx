@@ -17,21 +17,33 @@ export const Post = ({children}) => {
     };
 
     const handleRemovePost = async (post_id) => {
+
         setPosts(posts.filter((value) => value.post_id !== post_id));
+
         try {
-            const res = await axios.delete(`http://localhost:8080/v1/gratitude-journal/gratitude/${post_id}`, {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            });
+            const res = await axios
+                .delete(`http://localhost:8080/v1/gratitude-journal/gratitude/${post_id}`, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+
             showSnackbar("Delete was successful!", "success");
-            window.location.reload();
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000);
+
             return true;
+
         } catch (err) {
             if (err.response && err.response.status === 401) {
                 showSnackbar("Your session has expired. Please log in again.", "warning");
                 logout();
             }
+
+            showSnackbar("Unexpected error occurred.", "error");
+
             return false;
         }
     };

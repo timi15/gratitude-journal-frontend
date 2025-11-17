@@ -39,9 +39,11 @@ export const Auth = ({children}) => {
 
     const logout = () => {
         localStorage.removeItem("token");
+
         setToken(null);
         setUserRole(null);
         setIsAuthenticated(false);
+
         navigate("/login")
     };
 

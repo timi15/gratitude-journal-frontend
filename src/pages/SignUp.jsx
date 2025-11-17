@@ -21,7 +21,8 @@ export const SignUp = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post(
+        axios
+            .post(
             "http://localhost:8080/v1/gratitude-journal/auth/registration",
             formData,
             {
@@ -31,21 +32,27 @@ export const SignUp = () => {
             .then((res) => {
                 setFormData({name: '', username: '', email: '', password: ''});
                 navigate("/login");
-                console.log("Registration successful:", res);
+
+
             })
             .catch((err) => {
+
                 if (err.response) {
+
                     if (err.response.status === 409) {
                         showSnackbar(err.response.data.message, "error");
+
                     } else if (err.response.status === 400) {
                         const errors = err.response.data.errors;
                         const firstError = Object.values(errors)[0][0];
                         showSnackbar(firstError, "error");
+
                     } else {
                         showSnackbar(err.response.data, "error");
                     }
+
                 } else {
-                    console.log("Backend is not reachable.");
+                    showSnackbar("Unexpected error occurred.", "error");
                 }
             });
     }

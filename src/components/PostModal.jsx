@@ -70,20 +70,35 @@ export const PostModal = ({open, handleClose, editingPost}) => {
         })
             .then(() => {
                 window.location.reload();
+
             })
             .catch((err) => {
-                if (err.response && err.response.status === 401) {
+
+                if (err.response.status === 401) {
                     showSnackbar("Your session has expired. Please log in again.", "warning");
                     logout();
                 }
+
                 if (err.response?.status === 400) {
                     const errors = err.response.data.errors;
                     const firstError = Object.values(errors)[0][0];
                     showSnackbar(firstError, "error");
 
+                } else if (err.response?.status === 409) {
+                    showSnackbar(err.response.data.message, "error");
+
                 } else {
-                    console.log("Backend is not reachable.");
+                    showSnackbar("Unexpected error occurred.", "error");
                 }
+
+                setFormData({
+                    date: '',
+                    mood: '',
+                    dailyHighlight: '',
+                    dailyLesson: '',
+                    content: ''
+                });
+
             });
     };
 
@@ -155,6 +170,7 @@ export const PostModal = ({open, handleClose, editingPost}) => {
                 <Button type="submit" variant="contained" size="large">
                     {editingPost ? "Save Changes" : "Create"}
                 </Button>
+
             </Box>
         </Modal>
     );

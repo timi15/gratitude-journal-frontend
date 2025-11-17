@@ -58,24 +58,28 @@ export const PostsTable = ({onEdit}) => {
                         {posts
                             .map((post) => (
                                 <TableRow hover key={post.id}>
+
                                     <TableCell>{post.date}</TableCell>
+
                                     <TableCell>{post.mood}</TableCell>
+
                                     <TableCell sx={{
                                         whiteSpace: "normal",
                                         wordBreak: "break-word",
                                         maxWidth: 250
                                     }}>{post.dailyHighlight}</TableCell>
+
                                     <TableCell sx={{
                                         whiteSpace: "normal",
                                         wordBreak: "break-word",
                                         maxWidth: 250
                                     }}>{post.dailyLesson}</TableCell>
+
                                     <TableCell sx={{
                                         whiteSpace: "normal",
                                         wordBreak: "break-word",
                                         maxWidth: 250
                                     }}>{post.content}</TableCell>
-
 
                                     <TableCell align="center">
                                         <IconButton
