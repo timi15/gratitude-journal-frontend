@@ -21,7 +21,7 @@ export const Post = ({children}) => {
         setPosts(posts.filter((value) => value.post_id !== post_id));
 
         try {
-            const res = await axios
+            await axios
                 .delete(`http://localhost:8080/v1/gratitude-journal/gratitude/${post_id}`, {
                     headers: {
                         "Authorization": `Bearer ${token}`

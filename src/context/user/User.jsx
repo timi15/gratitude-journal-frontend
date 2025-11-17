@@ -21,7 +21,7 @@ export const User = ({children}) => {
         setUsers(users.filter((value) => value.user_id !== user_id ? value : user));
 
         try {
-            const res = await axios
+             await axios
                 .put(`http://localhost:8080/v1/gratitude-journal/users/${user_id}`, user, {
                     headers: {
                         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export const User = ({children}) => {
         setUsers(users.filter((value) => value.user_id !== user_id));
 
         try {
-            const res = await axios
+            await axios
                 .delete(`http://localhost:8080/v1/gratitude-journal/users/${user_id}`, {
                     headers: {
                         "Authorization": `Bearer ${token}`
