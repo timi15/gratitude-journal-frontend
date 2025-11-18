@@ -74,9 +74,10 @@ export const EditUserModal = ({open, handleClose, editingUser}) => {
                     }
                 />
 
-                <FormControl fullWidth margin="dense">
+                <FormControl fullWidth margin="dense" >
                     <InputLabel>Role</InputLabel>
                     <Select
+                        variant="outlined"
                         label="Role"
                         name="role"
                         value={formData.role}

@@ -17,8 +17,11 @@ export const User = ({children}) => {
     };
 
     const handleChangeUser = async (user_id, user) => {
+        console.log(user_id, user);
 
-        setUsers(users.filter((value) => value.id !== user_id ? value : user));
+        setUsers((prev) =>
+            prev.map((u) => (u.id === user_id ? user : u))
+        );
 
         try {
             await axios
