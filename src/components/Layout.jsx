@@ -8,7 +8,6 @@ import {
     IconButton,
     MenuItem,
     Toolbar,
-    Tooltip,
     Typography,
     Menu
 } from "@mui/material";
@@ -112,11 +111,9 @@ export const Layout = () => {
 
 
                         <Box sx={{flexGrow: 0}}>
-                            <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
                                     <Avatar alt="User" src="/static/images/avatar/2.jpg"/>
                                 </IconButton>
-                            </Tooltip>
 
                             <Menu
                                 sx={{mt: '45px'}}

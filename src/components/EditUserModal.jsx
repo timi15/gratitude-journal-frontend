@@ -10,18 +10,6 @@ import {UserContext} from "../context/user/User";
 import "../asserts/css/modal.css"
 import "../asserts/css/login.css"
 
-const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "darkslategray",
-    borderRadius: "8px",
-    boxShadow: 24,
-    p: 4,
-    height: '70vh'
-};
 
 export const EditUserModal = ({open, handleClose, editingUser}) => {
 
@@ -44,7 +32,7 @@ export const EditUserModal = ({open, handleClose, editingUser}) => {
 
     return (
         <Modal open={open} onClose={handleClose}>
-            <Box className="form" sx={style}>
+            <Box className="form modal-style">
                 <Typography variant="h4" mb={2}>
                     Edit User
                 </Typography>

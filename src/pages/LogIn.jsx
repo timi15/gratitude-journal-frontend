@@ -7,7 +7,6 @@ import {AuthContext} from "../context/auth/Auth";
 import {SnackbarContext} from "../context/SnackBar";
 import "../asserts/css/login.css"
 
-
 export const LogIn = () => {
 
     const navigate = useNavigate();
@@ -24,14 +23,13 @@ export const LogIn = () => {
 
         axios
             .post(
-            "http://localhost:8080/v1/gratitude-journal/auth/login",
-            formData,
-            {
-                headers: {"Content-Type": "application/json"}
-            }
-        )
+                "http://localhost:8080/v1/gratitude-journal/auth/login",
+                formData,
+                {
+                    headers: {"Content-Type": "application/json"}
+                }
+            )
             .then((res) => {
-
                 login(res.data);
                 showSnackbar("Login successful!", "success");
                 navigate("/home");
@@ -43,12 +41,15 @@ export const LogIn = () => {
                     if (err.response.status === 409) {
                         showSnackbar(err.response.data.message, "error");
 
+                    } else if (err.response.status === 404) {
+                        showSnackbar(err.response.data.message, "error");
+
                     } else if (err.response.status === 400) {
                         const errors = err.response.data.errors;
                         const firstError = Object.values(errors)[0][0];
                         showSnackbar(firstError, "error");
 
-                    } else if(err.response.status === 500) {
+                    } else if (err.response.status === 500) {
                         showSnackbar(err.response.data.message, "error");
                     }
                 } else {

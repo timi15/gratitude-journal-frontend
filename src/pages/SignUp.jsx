@@ -29,7 +29,7 @@ export const SignUp = () => {
                 headers: {"Content-Type": "application/json"}
             }
         )
-            .then((res) => {
+            .then(() => {
                 setFormData({name: '', username: '', email: '', password: ''});
                 navigate("/login");
 

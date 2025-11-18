@@ -6,19 +6,6 @@ import {SnackbarContext} from "../context/SnackBar";
 import "../asserts/css/login.css"
 import "../asserts/css/modal.css"
 
-const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "30rem",
-    bgcolor: "darkslategray",
-    borderRadius: "8px",
-    boxShadow: 24,
-    p: 4,
-    height: '80vh'
-};
-
 export const PostModal = ({open, handleClose, editingPost}) => {
 
     const {token, logout} = useContext(AuthContext);
@@ -105,8 +92,7 @@ export const PostModal = ({open, handleClose, editingPost}) => {
     return (
         <Modal open={open} onClose={handleClose}>
             <Box
-                sx={style}
-                className="form"
+                className="form modal-style"
                 component="form"
                 onSubmit={handleSubmit}
                 autoComplete="off"
@@ -158,6 +144,8 @@ export const PostModal = ({open, handleClose, editingPost}) => {
                 />
 
                 <TextField
+                    multiline
+                    rows={4}
                     fullWidth
                     id="content"
                     label="Content"

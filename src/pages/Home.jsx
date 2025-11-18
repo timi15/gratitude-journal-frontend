@@ -7,7 +7,6 @@ import {SnackbarContext} from "../context/SnackBar";
 import {PostContext} from "../context/post/Post";
 import {AuthContext} from "../context/auth/Auth";
 
-
 export const Home = () => {
 
     const {token, logout} = useContext(AuthContext);
