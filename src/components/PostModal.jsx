@@ -5,11 +5,13 @@ import {AuthContext} from "../context/auth/Auth";
 import {SnackbarContext} from "../context/SnackBar";
 import "../asserts/css/login.css"
 import "../asserts/css/modal.css"
+import {PostContext} from "../context/post/Post";
 
 export const PostModal = ({open, handleClose, editingPost}) => {
 
     const {token, logout} = useContext(AuthContext);
     const {showSnackbar} = useContext(SnackbarContext);
+    const {handleUpdatePost, handleAddPost} = useContext(PostContext);
 
     const [formData, setFormData] = useState({
         date: '',
@@ -18,6 +20,14 @@ export const PostModal = ({open, handleClose, editingPost}) => {
         dailyLesson: '',
         content: ''
     });
+
+    const emptyForm = {
+        date: '',
+        mood: '',
+        dailyHighlight: '',
+        dailyLesson: '',
+        content: ''
+    };
 
     useEffect(() => {
         if (editingPost) {
@@ -29,13 +39,7 @@ export const PostModal = ({open, handleClose, editingPost}) => {
                 content: editingPost.content
             });
         } else {
-            setFormData({
-                date: '',
-                mood: '',
-                dailyHighlight: '',
-                dailyLesson: '',
-                content: ''
-            });
+            setFormData(emptyForm);
         }
     }, [editingPost]);
 
@@ -55,8 +59,19 @@ export const PostModal = ({open, handleClose, editingPost}) => {
                 "Authorization": `Bearer ${token}`
             }
         })
-            .then(() => {
-                window.location.reload();
+            .then((res) => {
+                if (editingPost) {
+                    handleUpdatePost(res.data);
+                    setFormData(emptyForm);
+                } else {
+                    handleAddPost(res.data);
+                    setFormData(emptyForm);
+                }
+                handleClose();
+                showSnackbar(
+                    editingPost ? "Post updated!" : "Post created!",
+                    "success"
+                );
 
             })
             .catch((err) => {

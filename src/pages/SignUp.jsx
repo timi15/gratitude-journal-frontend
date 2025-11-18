@@ -31,6 +31,7 @@ export const SignUp = () => {
         )
             .then(() => {
                 setFormData({name: '', username: '', email: '', password: ''});
+                showSnackbar("Registration successful", "success");
                 navigate("/login");
 
 

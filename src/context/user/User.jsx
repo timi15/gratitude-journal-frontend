@@ -18,21 +18,17 @@ export const User = ({children}) => {
 
     const handleChangeUser = async (user_id, user) => {
 
-        setUsers(users.filter((value) => value.user_id !== user_id ? value : user));
+        setUsers(users.filter((value) => value.id !== user_id ? value : user));
 
         try {
-             await axios
+            await axios
                 .put(`http://localhost:8080/v1/gratitude-journal/users/${user_id}`, user, {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`
                     }
                 });
-            showSnackbar("Update was successful!", "success");
-
-            setTimeout(() => {
-                window.location.reload();
-            }, 3000);
+            showSnackbar("User updated!", "success");
 
             return true;
 
@@ -42,14 +38,15 @@ export const User = ({children}) => {
                 logout();
             }
 
-            showSnackbar("Unexpected error occurred.", "error");
+            showSnackbar("Update failed!", "error");
 
             return false;
         }
     };
 
     const handleRemoveUser = async (user_id) => {
-        setUsers(users.filter((value) => value.user_id !== user_id));
+
+        setUsers(users.filter((value) => value.id !== user_id));
 
         try {
             await axios
@@ -59,11 +56,7 @@ export const User = ({children}) => {
                     }
                 });
 
-            showSnackbar("Delete was successful!", "success");
-
-            setTimeout(() => {
-                window.location.reload();
-            }, 3000);
+            showSnackbar("User deleted!", "success");
 
             return true;
 
@@ -73,7 +66,7 @@ export const User = ({children}) => {
                 logout();
             }
 
-            showSnackbar("Unexpected error occurred.", "error");
+            showSnackbar("Delete failed!", "error");
 
             return false;
         }

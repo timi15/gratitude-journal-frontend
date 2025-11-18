@@ -26,7 +26,8 @@ export const EditUserModal = ({open, handleClose, editingUser}) => {
     }, [editingUser]);
 
     const handleSave = () => {
-        handleChangeUser(editingUser.id, formData)
+        handleChangeUser(editingUser.id, formData);
+        handleClose();
     }
 
 

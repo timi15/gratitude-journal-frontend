@@ -16,9 +16,23 @@ export const Post = ({children}) => {
         setPosts(posts);
     };
 
+    const handleAddPost = (newPost) => {
+        setPosts(prev => {
+            const updated = [...prev, newPost];
+            return updated.sort((a, b) => new Date(b.date) - new Date(a.date));
+        });
+    };
+
+    const handleUpdatePost = (updatedPost) => {
+        setPosts(prev => {
+            const updated = prev.map(p => p.id === updatedPost.id ? updatedPost : p);
+            return updated.sort((a, b) => new Date(b.date) - new Date(a.date));
+        });
+    };
+
     const handleRemovePost = async (post_id) => {
 
-        setPosts(posts.filter((value) => value.post_id !== post_id));
+        setPosts(posts.filter((value) => value.id !== post_id));
 
         try {
             await axios
@@ -28,11 +42,7 @@ export const Post = ({children}) => {
                     }
                 });
 
-            showSnackbar("Delete was successful!", "success");
-
-            setTimeout(() => {
-                window.location.reload();
-            }, 3000);
+            showSnackbar("Post deleted!", "success")
 
             return true;
 
@@ -42,7 +52,8 @@ export const Post = ({children}) => {
                 logout();
             }
 
-            showSnackbar("Unexpected error occurred.", "error");
+            showSnackbar("Delete failed!", "error");
+
 
             return false;
         }
@@ -50,7 +61,7 @@ export const Post = ({children}) => {
 
 
     return (
-        <PostContext.Provider value={{posts, handleSetPosts, handleRemovePost}}>
+        <PostContext.Provider value={{posts, handleSetPosts, handleAddPost, handleUpdatePost, handleRemovePost}}>
             {children}
         </PostContext.Provider>
     )
