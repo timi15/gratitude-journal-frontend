@@ -6,6 +6,7 @@ import {Home} from "./pages/Home";
 import {Layout} from "./components/Layout";
 import {ProtectedRoute} from "./components/ProtectedRoute";
 import {UserController} from "./pages/UserController";
+import {ErrorPage} from "./pages/ErrorPage";
 
 function App() {
 
@@ -22,6 +23,8 @@ function App() {
                 <Route path="/home" element={<Home/>}/>
                 <Route path="/users" element={<UserController/>}/>
             </Route>
+
+            <Route path='*' element={<ErrorPage />} />
 
         </Routes>
 
